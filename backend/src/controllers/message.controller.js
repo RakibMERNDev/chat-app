@@ -1,3 +1,17 @@
+export const sendMessage = async (req, res) => {
+  console.log("message sent")
+}
+
+
+
+
+
+
+
+
+
+
+
 export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;

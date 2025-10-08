@@ -5,6 +5,8 @@ import { getUsersForSidebar } from "../controllers/message.controller.js";
 
 const router = express.Router();
 
+router.post('/send/:id', sendMessage)
+
 
 // Define your message routes here
 
