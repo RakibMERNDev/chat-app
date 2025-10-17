@@ -7,6 +7,7 @@ import {
 
 const router = express.Router();
 
+router.get("/:id",protectRoute, getMessages);
 router.post("/send/:id",protectRoute, sendMessage);
 
 // Define your message routes here
