@@ -1,39 +1,45 @@
+import Conversation from "../models/conversation.model.js";
+import Message from "../models/message.model.js";
+
 export const sendMessage = async (req, res) => {
+  try {
+    const { message } = req.body;
+    const { id: receiverId } = req.params;
 
- 
-try {
-  
-const {message, } = req.body;
-const {id} = req.params;
+    const senderId = req.user._id;
 
-const senderId = req.user._id;
+    let conversation = await Conversation.findOne({
+      participants: {
+        $all: [senderId, receiverId],
+      },
+    });
 
+    if (!conversation) {
+      conversation = await Conversation.create({
+        participants: [senderId, receiverId],
+      });
+    }
 
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      message,
+    });
 
+    if (newMessage) {
+      conversation.messages.push(newMessage._id);
+    }
 
+    await conversation.save();
+    await newMessage.save();
 
-} catch (error) {
-  
+    res.status(200).json({ message: "Message sent successfully.", newMessage });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error." });
 
-res.status(500).json({ message: "Internal Server error." });
-
-  console.log("Error in sendMessage controller", error.message);
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
+    console.log("Error in sendMessage controller", error.message);
+  }
+};
 
 export const getUsersForSidebar = async (req, res) => {
   try {
