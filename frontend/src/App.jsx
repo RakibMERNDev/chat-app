@@ -8,6 +8,11 @@ import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
+
+
+
+
+  
   return (
     <>
       <div>
