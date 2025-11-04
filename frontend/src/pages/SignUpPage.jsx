@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import {
-  Eye,
-  EyeOff,
-  Loader2,
-  Lock,
-  Mail,
-  MessageSquare,
-  User,
-} from "lucide-react";
+
+import { FaEye, FaLock, FaRegUser } from "react-icons/fa";
+import { HiEyeOff } from "react-icons/hi";
+import { IoReload, IoMail } from "react-icons/io5";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
 
 import { Link } from "react-router-dom";
 
@@ -57,7 +53,7 @@ const SignUpPage = () => {
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
               group-hover:bg-primary/20 transition-colors"
               >
-                <MessageSquare
+                <BiSolidMessageSquareDetail
                   style={{ width: "24px", height: "24px", color: "black" }}
                 />
               </div>
@@ -75,7 +71,7 @@ const SignUpPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="size-5 text-base-content/40" />
+                  <FaRegUser className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type="text"
@@ -90,16 +86,19 @@ const SignUpPage = () => {
             </div>
 
             <div className="form-control">
-              <label className="label" for="email">
+              <label className="label" htmlFor="email">
                 <span className="label-text font-medium">Email</span>
               </label>
               <div className="relative">
+                {/* Mail Icon */}
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="size-5 text-base-content/40" />
+                  <IoMail className="text-base-content/40" />
                 </div>
+                {/* Input Field */}
                 <input
                   type="email"
-                  className={`input input-bordered w-full pl-10`}
+                  id="email"
+                  className="input input-bordered w-full pl-10"
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) =>
@@ -115,7 +114,7 @@ const SignUpPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="size-5 text-base-content/40" />
+                  <FaLock className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -132,9 +131,9 @@ const SignUpPage = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="size-5 text-base-content/40" />
+                    <HiEyeOff className="size-5 text-base-content/40" />
                   ) : (
-                    <Eye className="size-5 text-base-content/40" />
+                    <FaEye className="size-5 text-base-content/40" />
                   )}
                 </button>
               </div>
@@ -147,7 +146,7 @@ const SignUpPage = () => {
             >
               {isSigningUp ? (
                 <>
-                  <Loader2 className="size-5 animate-spin" />
+                  <IoReload className="size-5 animate-spin" />
                   Loading...
                 </>
               ) : (
