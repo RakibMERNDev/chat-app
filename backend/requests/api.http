@@ -22,6 +22,11 @@ content-type: application/json
 }
 
 
+### Logout User
+
+POST http://localhost:5001/api/auth/logout HTTP/1.1
+
+
 ### Get Messages For sidebar User
 
 GET http://localhost:5001/api/messages/68e6d7b4f6ea87c70f459420 HTTP/1.1
