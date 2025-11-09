@@ -1,6 +1,7 @@
-import Conversation from "../models/conversation.model.js";
+
 import Message from "../models/message.model.js";
 import mongoose from "mongoose";
+import User from "../models/user.model.js";
 
 export const getUsersForSidebar = async (req, res) => {
   try {
