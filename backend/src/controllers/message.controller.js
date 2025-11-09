@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import mongoose from "mongoose";
 
 export const getUsersForSidebar = async (req, res) => {
   try {
@@ -46,9 +47,11 @@ export const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
 
-    const { id: receiverId } = req.params;
+    const { id } = req.params;
 
     const senderId = req.user._id;
+
+    const receiverId = new mongoose.Types.ObjectId(id);
 
     let imageUrl;
 
