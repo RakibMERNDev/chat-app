@@ -1,0 +1,27 @@
+
+### Create User
+
+POST http://localhost:5001/api/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email" : "jhondoe212@gmail.com",
+    "fullName": "Jhon Doe",
+    "password": "123458d4"
+}
+
+
+### Login User
+
+POST  http://localhost:5001/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email" : "jhoncena22@gmail.com",
+     "password": "123458d4"
+}
+
+
+### Get Messages For sidebar User
+
+GET http://localhost:5001/api/messages/68e6d7b4f6ea87c70f459420 HTTP/1.1
