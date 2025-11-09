@@ -17,7 +17,7 @@ POST  http://localhost:5001/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "email" : "jhoncena22@gmail.com",
+    "email" : "jhondoe212@gmail.com",
      "password": "123458d4"
 }
 
@@ -27,6 +27,22 @@ content-type: application/json
 POST http://localhost:5001/api/auth/logout HTTP/1.1
 
 
-### Get Messages For sidebar User
+### Send Message To User
+
+
+POST http://localhost:5001/api/messages/send/68e6d7b4f6ea87c70f459420 HTTP/1.1
+Content-Type: application/json
+
+{
+    "text" : "Bye"
+}
+
+
+### Get Messages For User
+
+GET http://localhost:5001/api/messages/68e6d7b4f6ea87c70f459420 HTTP/1.1
+
+
+### Get Users For Sidebar
 
 GET http://localhost:5001/api/messages/68e6d7b4f6ea87c70f459420 HTTP/1.1
