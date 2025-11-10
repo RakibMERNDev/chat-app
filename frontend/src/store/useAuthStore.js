@@ -66,4 +66,10 @@ export const useAuthStore = create((set) => ({
       );
     }
   },
+
+  updateProfile: async (data) => {
+    console.log(data);
+
+    set({ isUpdatingProfile: true });
+  },
 }));
