@@ -31,10 +31,12 @@ export const useAuthStore = create((set) => ({
       set({ authUser: res.data });
       localStorage.setItem("authUser", JSON.stringify(res.data));
       toast.success("Signup successful!");
+      return true;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Signup failed. Please try again."
       );
+      return false;
     } finally {
       set({ isSigningUp: false });
     }
@@ -47,10 +49,12 @@ export const useAuthStore = create((set) => ({
       set({ authUser: res.data });
       localStorage.setItem("authUser", JSON.stringify(res.data));
       toast.success("Login successful!");
+      return true;
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Login failed. Please try again."
       );
+      return false;
     } finally {
       set({ isLoggingIn: false });
     }
