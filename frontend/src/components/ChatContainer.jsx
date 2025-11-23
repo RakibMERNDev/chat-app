@@ -56,18 +56,14 @@ const ChatContainer = () => {
               )}
             </div>
 
-{/* User info-online visible on larger screen */}
+            {/* User info-online visible on larger screen */}
 
-
-<div className="hidden lg:block text-left min-w 0">
-
-<div className="font-medium truncate">{user.fullName}</div>
-
-
-
-</div>
-
-
+            <div className="hidden lg:block text-left min-w 0">
+              <div className="font-medium truncate">{user.fullName}</div>
+              <div className="text-sm text-zinc-400">
+                {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+              </div>
+            </div>
           </button>
         ))}
       </div>
