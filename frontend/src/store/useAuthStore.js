@@ -3,30 +3,18 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
-  authUser: (() => {
-    try {
-      const storedUser = localStorage.getItem("authUser");
-      if (!storedUser || storedUser === "undefined" || storedUser === "null") {
-        return null;
-      }
-      return JSON.parse(storedUser);
-    } catch (error) {
-      console.error("Error parsing authUser from localStorage:", error);
-      localStorage.removeItem("authUser");
-      return null;
-    }
-  })(),
-
+  authUser: JSON.parse(localStorage.getItem("authUser")) || null,
   isSigningUp: false,
-  isLoggingIn: false, 
+  isLoggingIn: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
+  onlineUsers: [],
 
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
       set({ authUser: res.data.user });
-      localStorage.setItem("authUser", JSON.stringify(res.data.user)); 
+      localStorage.setItem("authUser", JSON.stringify(res.data.user));
     } catch (error) {
       set({ authUser: null });
       localStorage.removeItem("authUser");
@@ -57,7 +45,7 @@ export const useAuthStore = create((set) => ({
     try {
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
-      localStorage.setItem("authUser", JSON.stringify(res.data)); 
+      localStorage.setItem("authUser", JSON.stringify(res.data));
       toast.success("Login successful!");
     } catch (error) {
       toast.error(
@@ -87,7 +75,7 @@ export const useAuthStore = create((set) => ({
     try {
       const res = await axiosInstance.put("/auth/update-profile", data);
       set({ authUser: res.data });
-      localStorage.setItem("authUser", JSON.stringify(res.data)); 
+      localStorage.setItem("authUser", JSON.stringify(res.data));
       toast.success("Profile updated successfully");
     } catch (error) {
       toast.error(

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { Users } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
 
 const Sidebar = () => {
   const { getUsers, users, selectedUser, isUsersLoading, setSelectedUser } =
     useChatStore();
 
-  const onlineUsers = []; // Dummy online users array
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getUsers();
