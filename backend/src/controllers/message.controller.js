@@ -2,6 +2,7 @@ import Message from "../models/message.model.js";
 import mongoose from "mongoose";
 import User from "../models/user.model.js";
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export const getUsersForSidebar = async (req, res) => {
   try {
@@ -70,8 +71,12 @@ export const sendMessage = async (req, res) => {
     });
 
     await newMessage.save();
+    
+    const receiverSocketId = getReceiverSocketId(id);
 
-    //! TODO: realtime functionality with websockets
+    if(receiverSocketId) {
+      io.to(receiverId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {
